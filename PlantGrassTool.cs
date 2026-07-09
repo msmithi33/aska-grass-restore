@@ -1,9 +1,9 @@
 using SSSGame;
 using UnityEngine;
 
-namespace AskaGrassRestore
+namespace AskaPlantGrass
 {
-    public class GrassRestoreTool : MonoBehaviour
+    public class PlantGrassTool : MonoBehaviour
     {
         private HeightmapTool _heightmapTool;
         private readonly TerraformingToolOperation _operation = TerraformingToolOperation.PAINT;
@@ -12,7 +12,7 @@ namespace AskaGrassRestore
         {
             _heightmapTool = GetComponent<HeightmapTool>();
             if (_heightmapTool == null)
-                Plugin.Log.LogError("GrassRestoreTool: HeightmapTool component missing!");
+                Plugin.Log.LogError("PlantGrassTool: HeightmapTool component missing!");
         }
 
         private void Update()

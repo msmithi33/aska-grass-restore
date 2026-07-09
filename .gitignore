@@ -2,6 +2,6 @@ bin/
 obj/
 thunderstore/*.zip
 thunderstore/README.md
-thunderstore/AskaGrassRestore.dll
+thunderstore/*.dll
 nexusmods/*.zip
-nexusmods/AskaGrassRestore.dll
+nexusmods/*.dll

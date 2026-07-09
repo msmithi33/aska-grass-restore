@@ -1,9 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <AssemblyName>AskaGrassRestore</AssemblyName>
-    <Product>Aska Grass Restore</Product>
-    <RootNamespace>AskaGrassRestore</RootNamespace>
+    <AssemblyName>AskaPlantGrass</AssemblyName>
+    <Product>Aska Plant Grass</Product>
+    <RootNamespace>AskaPlantGrass</RootNamespace>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>latest</LangVersion>
     <AssemblyVersion>0.1.0</AssemblyVersion>

@@ -2,7 +2,7 @@ using HarmonyLib;
 using SSSGame;
 using UnityEngine;
 
-namespace AskaGrassRestore
+namespace AskaPlantGrass
 {
     [HarmonyPatch(typeof(Character))]
     public static class CharacterSpawnPatch
@@ -14,17 +14,17 @@ namespace AskaGrassRestore
             if (!__instance.IsPlayer() || __instance.GetLocalAuthorityMask() != 1)
                 return; // not our own local player's character - do nothing
 
-            if (__instance.GetComponentInChildren<GrassRestoreTool>() != null)
+            if (__instance.GetComponentInChildren<PlantGrassTool>() != null)
                 return; // already attached (e.g. re-fired on respawn)
 
-            var toolObj = new GameObject("AskaGrassRestore_Tool");
+            var toolObj = new GameObject("AskaPlantGrass_Tool");
             toolObj.transform.SetParent(__instance.gameObject.transform, false);
             toolObj.transform.localPosition = new Vector3(0f, 0f, 2f);
 
             toolObj.AddComponent<HeightmapTool>();
-            toolObj.AddComponent<GrassRestoreTool>();
+            toolObj.AddComponent<PlantGrassTool>();
 
-            Plugin.Log.LogInfo("GrassRestoreTool attached to local player.");
+            Plugin.Log.LogInfo("PlantGrassTool attached to local player.");
         }
     }
 }

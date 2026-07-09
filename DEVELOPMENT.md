@@ -15,17 +15,17 @@ Context for anyone (including future-me) picking this project back up.
 dotnet build -c Release
 ```
 
-Then copy `bin\Release\net6.0\AskaGrassRestore.dll` into `<game>\BepInEx\plugins\AskaGrassRestore\`.
+Then copy `bin\Release\net6.0\AskaPlantGrass.dll` into `<game>\BepInEx\plugins\AskaPlantGrass\`.
 
 **The DLL is locked while Aska is running** — close the game before overwriting it, or the copy fails with "Device or resource busy" / access denied.
 
-To check the plugin actually loaded and ran without exceptions, tail `<game>\BepInEx\LogOutput.log` and look for lines under the `Aska Grass Restore` log category.
+To check the plugin actually loaded and ran without exceptions, tail `<game>\BepInEx\LogOutput.log` and look for lines under the `Aska Plant Grass` log category.
 
 ## Why the code looks like this
 
 - **`Character` lives in the `SSSGame` namespace** in `Assembly-CSharp.dll` — not discoverable from the type name alone, found by reading a working reference mod's `using` statements.
 - **`Fusion.Runtime.dll` must be referenced even though no code names a Fusion type** — `Character` inherits Fusion's `NetworkBehaviour`, which is where `GetLocalAuthorityMask()` is actually defined. Drop the reference and the build fails with `CS0012`.
-- **`ClassInjector.RegisterTypeInIl2Cpp<T>()`** is only needed for *new* MonoBehaviour-derived types we author (`GrassRestoreTool`). Pre-existing game types like `HeightmapTool` don't need it — IL2CPP already has metadata for them.
+- **`ClassInjector.RegisterTypeInIl2Cpp<T>()`** is only needed for *new* MonoBehaviour-derived types we author (`PlantGrassTool`). Pre-existing game types like `HeightmapTool` don't need it — IL2CPP already has metadata for them.
 - **Gating on `IsPlayer() && GetLocalAuthorityMask() == 1`** in `Character.Spawned` is how the tool ends up attached only to the local player's own character, not NPCs or (in multiplayer) other players' characters. Confirmed empirically in-game: in a singleplayer session, `GetLocalAuthorityMask()` reads `1` for every character (villagers included) since the local session has authority over everything — `IsPlayer()` is what actually distinguishes "me" from NPCs there. The real multiplayer discriminating power of the mask is unverified (see Multiplayer below).
 - **Radius is configurable**, unlike the reference mod which hardcodes it — a deliberate one-line addition since it was low-risk and useful.
 - Avoided `Transform.CreateChild(...)` (used by the reference mod) in favor of plain `new GameObject` + `SetParent` — that extension method lives in `SandSailorStudio.dll`, a reference this project deliberately doesn't pull in to keep the dependency list minimal.
@@ -47,7 +47,7 @@ Built to the same local-authority-gated pattern as the reference mod, which shou
 - [x] Plugin loads (`LogOutput.log` shows load line, no errors)
 - [x] Harmony patch fires once per `Character.Spawned`, correctly distinguishes the local player from NPCs
 - [x] Pressing the configured key near dirt/mud visibly restores grass in singleplayer
-- [x] Config file generates with `Enabled`/`Key`/`Radius` in one `[GrassRestore]` section
+- [x] Config file generates with `Enabled`/`Key`/`Radius` in one `[PlantGrass]` section
 - [x] Roads/paths are left untouched when painting dirt right next to them
 - [x] Painting near a building is skipped entirely, no grass appears under/through it
 - [ ] Multiplayer replication (needs a second tester)

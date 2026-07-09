@@ -1,7 +1,7 @@
 {
-    "name": "GrassRestore",
+    "name": "PlantGrass",
     "version_number": "0.1.0",
-    "website_url": "https://github.com/msmithi33/aska-grass-restore",
+    "website_url": "https://github.com/msmithi33/aska-plant-grass",
     "description": "Repaint grass onto trampled dirt/mud terrain with a keypress.",
     "dependencies": [
         "BepInEx-BepInExPack_IL2CPP-6.0.755"

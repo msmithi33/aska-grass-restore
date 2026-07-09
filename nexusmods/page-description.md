@@ -1,4 +1,4 @@
-# Grass Restore
+# Plant Grass
 
 Repaint grass onto terrain that's turned to bare dirt/mud from trampling — press a key, get your grass back.
 
@@ -9,7 +9,7 @@ Repaint grass onto terrain that's turned to bare dirt/mud from trampling — pre
 ## Installation
 
 Extract the archive into your Aska game folder (same folder as `Aska.exe`), so the DLL ends up at:
-`BepInEx\plugins\AskaGrassRestore\AskaGrassRestore.dll`
+`BepInEx\plugins\AskaPlantGrass\AskaPlantGrass.dll`
 
 ## Usage
 
@@ -31,4 +31,4 @@ Built using the same local-authority pattern as other Aska terrain mods, which s
 
 ## Source
 
-https://github.com/msmithi33/aska-grass-restore
+https://github.com/msmithi33/aska-plant-grass

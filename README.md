@@ -1,4 +1,4 @@
-# Aska Grass Restore
+# Aska Plant Grass
 
 A [BepInEx](https://github.com/BepInEx/BepInEx) mod for [Aska](https://store.steampowered.com/app/2823370/ASKA/) that lets you repaint grass back onto terrain that's turned to bare dirt/mud from trampling.
 
@@ -11,7 +11,7 @@ Roads, paths, and bedrock are left untouched, and the tool won't paint at all if
 ## Install
 
 1. Install BepInEx 6 (IL2CPP) into your Aska game folder.
-2. Drop `AskaGrassRestore.dll` into `BepInEx\plugins\AskaGrassRestore\`.
+2. Drop `AskaPlantGrass.dll` into `BepInEx\plugins\AskaPlantGrass\`.
 3. Launch the game once to generate `BepInEx\config\smithio.aska.plantgrass.cfg`.
 
 ## Config
