@@ -34,6 +34,10 @@
       <HintPath>$(AskaInteropDir)Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <!-- Required even though our code never names a Fusion type directly:
+         Character inherits Photon Fusion's NetworkBehaviour, which is where
+         GetLocalAuthorityMask() actually lives. Omitting this reference
+         fails with CS0012. -->
     <Reference Include="Fusion.Runtime">
       <HintPath>$(AskaInteropDir)Fusion.Runtime.dll</HintPath>
       <Private>False</Private>

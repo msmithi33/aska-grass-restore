@@ -23,3 +23,7 @@ Press `]` (configurable) near a dirt patch to restore grass in a radius around y
 ## Multiplayer
 
 The tool only ever runs against the local player's own character (gated on `IsPlayer()` and `GetLocalAuthorityMask() == 1`), the same pattern used by other Aska mods with similar terrain tools. This *should* replicate to other connected players via the game's own Photon Fusion networking, but has only been verified in singleplayer so far — multiplayer behavior is currently untested.
+
+## Development
+
+See [DEVELOPMENT.md](DEVELOPMENT.md) for environment setup, build/deploy steps, and the reasoning behind the trickier bits of the code.
