@@ -42,13 +42,9 @@ Attempted to make the paint radius configurable and never got it working, despit
 2. Discovered `HeightmapTool` also has `SetSize(TerraformingToolSize)` (`TerraformingToolSize` is `{ SMALL, MEDIUM, MEDIUM_SOFT, EXTRA_LARGE }`), backed by a `Config`/`_activeConfig`/data-buffer system (`HeightmapTool.Config` has `size`, `brush`, `data`, `CreateData(...)`). Hypothesis: `SetSize()` builds the actual data buffer the paint operation iterates over, so `radius` alone doing nothing made sense if the buffer size never changed. Switched the config to drive `SetSize()` instead. Still no visible effect, confirmed in-game with `Size = EXTRA_LARGE`.
 3. Tried both together (`SetSize()` *and* `radius` set from a size-to-meters mapping). Still no visible effect.
 
-At that point a confound surfaced: testing had been happening repeatedly in the same small spot across many earlier rounds of testing (Structure exclusion, footprint-tag fix, etc.), which could have masked a real change if that patch was already fully converted to `NATURAL`. That turned out not to be the actual explanation either — **the real cause is that painted grass isn't persisted between game launches** (see below), so every test was unknowingly starting from a fresh, unmodified DIRT patch each time, and "no visible difference" was real, not a testing artifact.
+At one point it looked like grass might not be persisting across game restarts, which would have explained repeated tests in the same spot showing "no difference" regardless of config. That was a false lead — the game session in question had been closed without saving, so of course the change wasn't there next launch. No actual persistence bug; this was just a testing artifact from quitting without saving.
 
 Given three failed hypotheses and no way to decompile the native method bodies that actually determine paint extent (would need Il2CppDumper + a disassembler against `GameAssembly.dll`, well beyond what's reasonable for this feature), radius/size configurability was dropped. The paint radius is fixed at `PlantGrassTool.RadiusMeters = 1f`, matching the reference mod's own hardcoded value, which is the one value empirically confirmed to work.
-
-## Known issue: painted grass doesn't persist across game restarts
-
-Discovered while debugging the radius issue above: grass restored by this mod reverts to `DIRT` after closing and relaunching the game (confirmed by the user testing the same spot repeatedly across sessions and always finding it back to bare dirt). This means `HeightmapTool.Run()`/`PaintHere()` mutate the in-memory `TerraformingMap` but that change isn't being written into the save data the way the game's own terrain edits are. Not yet investigated further - the likely next step is figuring out what part of Aska's save/serialization path terrain-type changes are supposed to go through (possibly something the game's own terraforming tools trigger via a save/dirty-flag call that this mod isn't calling), but that needs its own investigation pass.
 
 ## Reference implementation
 
@@ -67,7 +63,6 @@ Built to the same local-authority-gated pattern as the reference mod, which shou
 - [x] Roads/paths are left untouched when painting dirt right next to them
 - [x] Painting near a building is skipped entirely, no grass appears under/through it
 - [ ] Multiplayer replication (needs a second tester)
-- [ ] Grass persists across a game restart (currently known broken, see above)
 
 ## Publishing
 
