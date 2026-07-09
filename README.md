@@ -6,6 +6,8 @@ A [BepInEx](https://github.com/BepInEx/BepInEx) mod for [Aska](https://store.ste
 
 Press `]` (configurable) near a dirt patch to restore grass in a radius around you.
 
+Roads, paths, and bedrock are left untouched, and the tool won't paint at all if a building is within range — only trampled dirt gets grassed over.
+
 ## Install
 
 1. Install BepInEx 6 (IL2CPP) into your Aska game folder.
